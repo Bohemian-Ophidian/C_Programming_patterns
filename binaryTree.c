@@ -71,6 +71,23 @@ TreeNode* searchTreeNode(TreeNode* root, int data){
         }
         return NULL;
 }
+TreeNode* findMin(TreeNode* root){
+        if(root == NULL)
+                return NULL;
+        while(root->left!= NULL){
+                root = root->left;
+        }
+
+        return root;
+}
+TreeNode* findMax(TreeNode* root){
+        if(root == NULL)
+                return NULL;
+        while(root->right != NULL){
+                root = root->right;
+        }
+        return root;
+}
 int main(void){
         TreeNode* root = initTreeNode();
         insertTreeNode(&root, 16);
