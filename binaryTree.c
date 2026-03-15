@@ -88,16 +88,55 @@ TreeNode* findMax(TreeNode* root){
         }
         return root;
 }
+
+void printInorder(TreeNode* root){
+        //recursive 
+        if(root == NULL)
+                return;
+        printInorder(root->left);
+        printf("%d\t", root->data);
+        printInorder(root->right);
+        return;
+}
+
+void printPostorder(TreeNode* root){
+        if(root == NULL)
+                return;
+        printPostorder(root->left);
+        printPostorder(root->right);
+        printf("%d\t", root->data);
+        return;
+}
+
+void printPreorder(TreeNode* root){
+        if(root == NULL)
+                return;
+        printf("%d\t", root->data);
+        printPreorder(root->left);
+        printPreorder(root->right);
+        return;
+}
+
 int main(void){
         TreeNode* root = initTreeNode();
         insertTreeNode(&root, 16);
         insertTreeNode(&root, 17);
         insertTreeNode(&root, 15);
+        insertTreeNode(&root, 20);
+        insertTreeNode(&root, 21);
+        insertTreeNode(&root, 13);
+        insertTreeNode(&root, 14);
         printf("%d\n",root->data);
         printf("%d\n",root->left->data);
         printf("%d\n",root->right->data);
-        TreeNode* ptr = searchTreeNode(root, 16);
+        TreeNode* ptr = findMax(root);
         printf("%d\n", ptr->data);
+        printInorder(root);
+        printf("\n");
+        printPreorder(root);
+        printf("\n");
+        printInorder(root);
+
         destroyTreeNode(root);
         root = NULL;//good practice to avoid pointer pointing in unwanted spaces
         return 0;
