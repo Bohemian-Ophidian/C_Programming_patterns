@@ -117,6 +117,11 @@ void printPreorder(TreeNode* root){
         return;
 }
 
+void deleteNode(TreeNode* root, int data){
+        if(root == NULL)
+                return;
+}
+
 int main(void){
         TreeNode* root = initTreeNode();
         insertTreeNode(&root, 16);
