@@ -117,9 +117,52 @@ void printPreorder(TreeNode* root){
         return;
 }
 
-void deleteNode(TreeNode* root, int data){
-        if(root == NULL)
+TreeNode* findSuccessor(TreeNode** root){
+        if((*root)->left == NULL){
+                TreeNode* temp = *root;
+                *root = (*root)->right;
+                return temp;
+        }
+        return findSuccessor(&(*root)->left);
+}
+
+
+
+void deleteNode(TreeNode** root, int data){
+        if(*root == NULL)
                 return;
+        if((*root)->data >data)
+                deleteNode(&(*root)->left, data);
+        else if ((*root)->data <data)
+                deleteNode(&(*root)->right, data);
+        else {
+                if((*root)->left == NULL && (*root)->right == NULL){
+                        free(*root);
+                        *root = NULL;
+                        return;
+                }
+                else if((*root)->right == NULL){
+                        TreeNode* temp = *root;
+                        *root = (*root)->left;
+                        free(temp);
+                }
+                else if((*root)->left == NULL){
+                        TreeNode* temp = *root;
+                        *root = (*root)->right;
+                        free(temp);
+                }
+                else {
+                        TreeNode* temp = *root;
+                        *root = findSuccessor(&(*root)->right);
+                        (*root)->left = temp->left;
+                        if(temp->right != *root){
+                            (*root)->right = temp->right;
+                        }
+                        free(temp);
+                }
+                      
+
+        }
 }
 
 int main(void){
@@ -131,6 +174,12 @@ int main(void){
         insertTreeNode(&root, 21);
         insertTreeNode(&root, 13);
         insertTreeNode(&root, 14);
+        insertTreeNode(&root, 77);
+        insertTreeNode(&root, 78);
+        insertTreeNode(&root, 55);
+        insertTreeNode(&root, 8);
+        insertTreeNode(&root, 1);
+        insertTreeNode(&root, 2);
         printf("%d\n",root->data);
         printf("%d\n",root->left->data);
         printf("%d\n",root->right->data);
