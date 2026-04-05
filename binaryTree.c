@@ -187,6 +187,11 @@ int main(void){
         printf("%d\n", ptr->data);
         printInorder(root);
         printf("\n");
+        deleteNode(&root, 16);
+        deleteNode(&root,21);
+        deleteNode(&root, 2);
+        printInorder(root);
+        printf("\n");
         printPreorder(root);
         printf("\n");
         printInorder(root);
