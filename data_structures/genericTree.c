@@ -60,6 +60,18 @@ bool isLeaf(NTreeNode* node){
                 return false;
 }
 
+void removeSubTree(NTreeNode* node){
+        if(node == NULL)
+                return;
+        if(node->firstChild != NULL)
+                removeSubTree(node->firstChild);
+        if(node->nextSibling != NULL)
+                removeSubTree(node->nextSibling);
+
+        free(node);
+        return;
+}
+
 NTreeNode* findNode(NTreeNode* parent, int data){
         if(parent == NULL)
                 return NULL;
@@ -94,6 +106,7 @@ int main(void){
         printf("\n");
         NTreeNode* check = findNode(newnode, 21);
         printf("%d", check->data);
+        removeSubTree(newnode);
 
         return 0;
 }
